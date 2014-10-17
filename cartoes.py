@@ -3,15 +3,6 @@
 # Escrito e testado para Python versao:
 # 3.3.2 (v3.3.2:d047928ae3f6, May 16 2013, 00:03:43)
 
-
-# COBRIR TODOS OS CASOS DE INPUT INVALIDO??
-# VALE A PENA USAR ELIFS? OU SO IFS E NO FIM RETURN?
-#     ___
-#    /   \
-#     | |
-#     | | Questoes aqui em cima!
-#     | |
-
 import random
 
 # Usam se tuplos para guardar a informacao da Tabela 1 do 
