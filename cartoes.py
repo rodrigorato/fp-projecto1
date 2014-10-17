@@ -9,10 +9,11 @@
 
 import random
 
-# Tabela 1 do enunciado, onde tuplo e' substituido pela abreviatura da rede:
-# tuplo[0] = Tuplo com os prefixos possiveis em tipo string
-# tuplo[1] = Tuplo com os numeros de digitos possiveis em inteiro
-# tuplo[2] = Nome da rede emissora em string
+# Usam se tuplos para guardar a informacao da Tabela 1 do 
+# enunciado com a seguinte estrutura. ABREV e' substituido pela abreviatura da rede:
+# ABREV[0] = Tuplo com os prefixos possiveis em tipo string
+# ABREV[1] = Tuplo com os numeros de digitos possiveis em inteiro
+# ABREV[2] = Nome da rede emissora em string
 AE = (("34", "37"), (15,), "American Express")
 DCI = (("309", "36", "38", "39"), (14,), "Diners Club International")
 DC = (("65",), (16,), "Discover Card")
@@ -22,7 +23,7 @@ VE = (("4026", "426", "4405", "4508"), (16,), "Visa Electron")
 V = (("4024", "4532", "4556"), (13, 16), "Visa")
 
 def calc_soma(cadeia):
-    # Recebe uma string e devolve inteiro
+    '''Recebe uma string e devolve o inteiro correspondente 'a soma ponderada dos digitos, calculada com o algoritmo de Luhn.'''
     cadeia = inverte_string(cadeia)
     cadeia = duplicaImparesESubtraiNove(cadeia)
     soma = 0
@@ -31,7 +32,7 @@ def calc_soma(cadeia):
     return soma
 
 def inverte_string(cadeia):
-    # Recebe e devolve uma string
+    '''Recebe uma string e devolve a string correspondente 'a primeira invertida, necessario para o algoritmo de Luhn.'''
     cadeia_invertida = ""
     n = len(cadeia) - 1
     while n >= 0:
@@ -40,7 +41,7 @@ def inverte_string(cadeia):
     return cadeia_invertida
 
 def duplicaImparesESubtraiNove(cadeia):
-    # Recebe e devolve uma string
+    '''Recebe uma string e devolve a string com os numeros em indices impares multiplicados por dois e caso esses numeros sejam superiores a 9 e' lhes subtraido o valor 9.'''
     duplicados = ""
     n = 0
     for n in range(len(cadeia)):
@@ -50,43 +51,40 @@ def duplicaImparesESubtraiNove(cadeia):
                 else:
                     duplicados = duplicados + str(eval(cadeia[n]) * 2)
             else:
-                
                 duplicados = duplicados + cadeia[n]
     return duplicados
 
 
 def luhn_verifica(str_nr_cartao):
+    '''Recebe uma string (numero do cartao) e devolve o valor logico True se o numero do cartao passar o algoritmo de Luhn e False em caso contrario.'''
     digito_verificacao = eval(str_nr_cartao) % 10
     str_nr_sem_verificacao = str(eval(str_nr_cartao) // 10)
     cartao_somado = calc_soma(str_nr_sem_verificacao) + digito_verificacao
-    if cartao_somado % 10 == 0:
-        return True
-    else:
-        return False
+    return cartao_somado % 10 == 0
+    #if cartao_somado % 10 == 0:
+        #return True
+    #else:
+        #return False
 
 def comeca_por(cad1, cad2):
+    '''Recebe duas cadeias e verifica se a segunda esta' contida no inicio da primeira. Devolve True/False.'''
     if len(cad2) > len(cad1) or cad2 == "":
         return False
-    comeca = True
     for n in range(len(cad2)):
         if cad1[n] != cad2[n]:
-            comeca = False
-    return comeca
+            return False
+    return True
 
 def comeca_por_um(cad, t_cads):
-    # falta confirmar
+    '''Recebe uma cadeia e um tuplo de cadeias e verifica se alguma das cadeias no tuplo esta' contida no inicio da primeira cadeia. Devolve True/False'''
     for elemento in t_cads:
         if comeca_por(cad, elemento):
             return True
     return False
-    #for i in range(len(t_cads)):
-        #if comeca_por(cad, t_cads[i]):
-            #return True
-    #return False
 
 def valida_iin(cadeia):
-    # DEFINICOES DOS TUPLOS ESTAO NO CABECALHO DO PROGRAMA!!    
-    if comeca_por_um(cadeia, AE[0]) and numero_digitos(cadeia, AE[1]):
+    '''Usa os tuplos definidos no cabecalho do programa para validar o iin da cadeia que a funcao recebe.'''    
+    if comeca_por_um(cadeia, AE[0]) and numero_digitos(cadeia, AE[1]): 
         return AE[2]
     if comeca_por_um(cadeia, DCI[0]) and numero_digitos(cadeia, DCI[1]):
         return DCI[2]
@@ -140,9 +138,7 @@ def verifica_cc(numero_cartao):
     else:
         return "cartao invalido"
     
-#1a parte em cima  /\
-#                  ||
-#2a parte em baixo \/
+# Comeca a segunda parte do projeto
 
 def randomCartaoSemVerificacao(abrev):
     num = 0
