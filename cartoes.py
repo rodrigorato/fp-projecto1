@@ -1,16 +1,18 @@
-# CONFIRMAR O QUE E PRECISO DE COMENTARIOS PARA ENTREGAR !!!!!!!!!!1
-# NOME E ESSAS TRETAS
+# Rodrigo Rato - 81500
 #
-# COMECA AQUI APAGAR ISTO /\
-#                         ||
-#  comeca aqui em baixo   ||
-# gera_num_cc se receber -1 de antes?
+# Escrito e testado para Python versao:
+# 3.3.2 (v3.3.2:d047928ae3f6, May 16 2013, 00:03:43) [MSC v.1600 32 bit (Intel)]
+
+# questoes:
+# luhn_verifica com eval strs
+# comeca_por_um qual das maneiras
+
 import random
 
-# estes tuplos marcam a estrutura dos cartoes
-# tuplo[0] = Tuplo com os prefixos possiveis em string
+# Tabela 1 do enunciado, onde tuplo e' substituido pela abreviatura da rede:
+# tuplo[0] = Tuplo com os prefixos possiveis em tipo string
 # tuplo[1] = Tuplo com os numeros de digitos possiveis em inteiro
-# tuplo[2] = Nome da Rede emissora em string
+# tuplo[2] = Nome da rede emissora em string
 AE = (("34", "37"), (15,), "American Express")
 DCI = (("309", "36", "38", "39"), (14,), "Diners Club International")
 DC = (("65",), (16,), "Discover Card")
@@ -19,8 +21,8 @@ MC = (("50", "51", "52", "53", "54", "19"), (16,), "Master Card")
 VE = (("4026", "426", "4405", "4508"), (16,), "Visa Electron")
 V = (("4024", "4532", "4556"), (13, 16), "Visa")
 
-
 def calc_soma(cadeia):
+    # Recebe uma string e devolve inteiro
     cadeia = inverte_string(cadeia)
     cadeia = duplicaImparesESubtraiNove(cadeia)
     soma = 0
@@ -29,12 +31,29 @@ def calc_soma(cadeia):
     return soma
 
 def inverte_string(cadeia):
+    # Recebe e devolve uma string
     cadeia_invertida = ""
-    n = len(cadeia) -1
+    n = len(cadeia) - 1
     while n >= 0:
         cadeia_invertida = cadeia_invertida + cadeia[n]
         n = n - 1
     return cadeia_invertida
+
+def duplicaImparesESubtraiNove(cadeia):
+    # Recebe e devolve uma string
+    duplicados = ""
+    n = 0
+    for n in range(len(cadeia)):
+            if ((n+1) % 2) != 0:
+                if (eval(cadeia[n]) * 2) > 9:
+                    duplicados = duplicados + str((eval(cadeia[n]) * 2) - 9)
+                else:
+                    duplicados = duplicados + str(eval(cadeia[n]) * 2)
+            else:
+                
+                duplicados = duplicados + cadeia[n]
+    return duplicados
+
 
 def luhn_verifica(str_nr_cartao):
     digito_verificacao = eval(str_nr_cartao) % 10
@@ -44,43 +63,26 @@ def luhn_verifica(str_nr_cartao):
         return True
     else:
         return False
-    
-def duplicaImparesESubtraiNove(cadeia):
-    # recebe string devolve string para evitar que comece por zero
-    duplicados = ""
-    n = 0
-    while n < len(cadeia):
-            if ((n+1) % 2) != 0:
-                if (eval(cadeia[n]) * 2) > 9:
-                    duplicados = duplicados + str((eval(cadeia[n]) * 2) - 9)
-                else:
-                    duplicados = duplicados + str(eval(cadeia[n]) * 2)
-            else:
-                
-                duplicados = duplicados + cadeia[n]
-            n = n + 1    
-    return duplicados
 
 def comeca_por(cad1, cad2):
-    #devolve True de cad1 comecar por cad2
-    #confirmar se cobre todos os casos!!
-    if len(cad2) > len(cad1):
+    if len(cad2) > len(cad1) or cad2 == "":
         return False
-    flag = True
+    comeca = True
     for n in range(len(cad2)):
         if cad1[n] != cad2[n]:
-            flag = False
-    if flag:
-        return True
-    else:
-        return False
+            comeca = False
+    return comeca
 
 def comeca_por_um(cad, t_cads):
     # falta confirmar
-    for i in range(len(t_cads)):
-        if comeca_por(cad, t_cads[i]):
+    for elemento in t_cads:
+        if comeca_por(cad, elemento):
             return True
     return False
+    #for i in range(len(t_cads)):
+        #if comeca_por(cad, t_cads[i]):
+            #return True
+    #return False
 
 def valida_iin(cadeia):
     # DEFINICOES DOS TUPLOS ESTAO NO CABECALHO DO PROGRAMA!!    
@@ -141,8 +143,6 @@ def verifica_cc(numero_cartao):
 #1a parte em cima  /\
 #                  ||
 #2a parte em baixo \/
-
-#def randomCartaoSemVerificacao(abrev):
 
 def randomCartaoSemVerificacao(abrev):
     num = 0
