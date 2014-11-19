@@ -18,6 +18,7 @@ The code is supposed to:
  - Written in Python 3.3.2 and uses the 'random' module.
  - All this had to function correctly according to all the criteria our teacher gave us and no non-ASCII characters could be in the dot py (.py) file, hence all the comments with plicas and such.
  - As of now its working and got 14/14 in a Mooshak testing environment
+ - Graded 18,92 / 20
 
 ----------
 <h3>README EM PORTUGUÊS</h3>
@@ -41,7 +42,7 @@ Este programa é suposto:
  - Escrito para Python 3.3.2 e usa o módulo 'random'.
  - Tudo isto tinha de funcionar correctamente e de acordo com todos os critérios estabelecidos pelo professor, não podiam haver caracteres não-ASCII no ficheiro de texto de extensão py (.py), daí todos os comentários com apostrofes como 'acentos'.
  - Por agora o programa está a trabalhar correctamente e passou 14/14 testes num ambiente Mooshak.
-
+ - Nota 18,92 / 20
 
 ----------
 README edited with:
